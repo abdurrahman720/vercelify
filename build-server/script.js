@@ -7,8 +7,8 @@ const mime = require("mime-types");
 const s3Client = new S3Client({
   region: "ap-south-1",
   credentials: {
-    accessKeyId: `${process.env.ACCESS_ID_KEY}`,
-    secretAccessKey: `${process.env.SECRET_ACCESS_KEY}`,
+    accessKeyId: ``,
+    secretAccessKey: ``,
   },
 });
 
@@ -38,7 +38,9 @@ async function init() {
       recursive: true,
     }); // will get every folder under folder
 
-    for (const filePath of distFolderContents) {
+    for (const file of distFolderContents) {
+      const filePath = path.join(distFolderPath, file);
+
       if (fs.lstatSync(filePath).isDirectory()) {
         continue;
       }
