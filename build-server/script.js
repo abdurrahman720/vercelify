@@ -7,10 +7,12 @@ const mime = require("mime-types");
 const s3Client = new S3Client({
   region: "ap-south-1",
   credentials: {
-    accessKeyId: "AKIAVRUVSYXL4P62ZAGJ",
-    secretAccessKey: "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",
+    accessKeyId: `${process.env.ACCESS_ID_KEY}`,
+    secretAccessKey: `${process.env.SECRET_ACCESS_KEY}`,
   },
 });
+
+console.log(process.env.ACCESS_ID_KEY)
 
 const PROJECT_ID = process.env.PROJECT_ID;
 
