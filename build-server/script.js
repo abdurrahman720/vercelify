@@ -12,7 +12,7 @@ const s3Client = new S3Client({
   },
 });
 
-console.log(process.env.ACCESS_ID_KEY)
+console.log(process.env.ACCESS_ID_KEY);
 
 const PROJECT_ID = process.env.PROJECT_ID;
 
@@ -44,18 +44,18 @@ async function init() {
       if (fs.lstatSync(filePath).isDirectory()) {
         continue;
       }
-        
-        console.log("uploading file path")
+
+      console.log("uploading file path");
       //else read the files and upload on s3
       const command = new PutObjectCommand({
         Bucket: "vercelify",
-        Key: `__outputs/${PROJECT_ID}/${filePath}`,
+        Key: `__outputs/${PROJECT_ID}/${file}`,
         Body: fs.createReadStream(filePath),
         ContentType: mime.lookup(filePath),
       });
 
-        await s3Client.send(command);
-        console.log("Uploaded,", filePath)
+      await s3Client.send(command);
+      console.log("Uploaded,", filePath);
     }
 
     console.log("done...");
