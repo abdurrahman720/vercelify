@@ -10,6 +10,7 @@ const BASE_PATH = `https://vercelify.s3.ap-south-1.amazonaws.com/__outputs`;
 const proxy = httpProxy.createProxy();
 
 app.use((req, res) => {
+
   const hostName = req.hostname;
   console.log("hostName...", hostName);
 
@@ -20,20 +21,20 @@ app.use((req, res) => {
 
   const resolvesTo = `${BASE_PATH}/${subDomain}`;
 
-    console.log("resolving to path... ", resolvesTo);
-    
-    return proxy.web(req, res, { target: resolvesTo, changeOrigin: true });
-    
+  console.log("resolving to path... ", resolvesTo);
 
+  return proxy.web(req, res, { target: resolvesTo, changeOrigin: true });
 });
 
-proxy.on('proxyReq', (proxyReq, req, res) => {
-    const url = req.url;
-    
-    if (url === '/') {
-        
-    }
-})
+proxy.on("proxyReq", (proxyReq, req, res) => {
+  const url = req.url;
+
+  console.log("url", url);
+
+  if (url === "/") {
+    proxyReq.path += "index.html";
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Reverse Proxy on ${PORT}`);
