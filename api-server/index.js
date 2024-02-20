@@ -9,7 +9,7 @@ const app = express();
 const PORT = 9000;
 
 const subscriber = new Redis(
-  `rediss://default:AVNS__TgN9_aSXGWGllN9Xne@redis-vercelify-vercelify.a.aivencloud.com:16820`
+  `${process.env.REDIS_AIVEN_URI}`
 );
 
 const io = new Server({ cors: "*" });

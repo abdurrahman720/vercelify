@@ -8,7 +8,9 @@ require('dotenv').config();
 
 
 
-const publisher  = new Redis(`rediss://default:AVNS__TgN9_aSXGWGllN9Xne@redis-vercelify-vercelify.a.aivencloud.com:16820`)
+const publisher  =  new Redis(
+  `${process.env.REDIS_AIVEN_URI}`
+);
 
 
 function publishLog(log) {
